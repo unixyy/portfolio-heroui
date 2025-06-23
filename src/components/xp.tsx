@@ -19,25 +19,6 @@ interface itemProps {
 }
 
 export default function Xp() {
-  const motionTooltip = {
-    variants: {
-      exit: {
-        opacity: 0,
-        transition: {
-          duration: 0.1,
-          ease: "easeIn",
-        },
-      },
-      enter: {
-        opacity: 1,
-        transition: {
-          duration: 0.15,
-          ease: "easeOut",
-        },
-      },
-    },
-  };
-
   const items: itemProps[] = [
     {
       company: "Ubisoft Montreal",
@@ -185,7 +166,6 @@ export default function Xp() {
                   closeDelay={0}
                   content={elt.name}
                   delay={0}
-                  motionProps={motionTooltip}
                   placement="bottom"
                 >
                   <Icon
