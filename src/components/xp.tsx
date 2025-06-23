@@ -1,11 +1,12 @@
-import { Chip, Divider } from "@heroui/react";
+import { Chip, Divider, Tooltip } from "@heroui/react";
 
-import ubisoft from "/public/ubisoft.svg";
-import lirmm from "/public/lirmm.png";
-import greenoxya from "/public/greenoxya.png";
+import ubisoft from "/ubisoft.svg";
+import lirmm from "/lirmm.png";
+import greenoxya from "/greenoxya.png";
 
 import { Image } from "@heroui/react";
 import { motion } from "framer-motion";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 interface itemProps {
   company: string;
@@ -13,10 +14,30 @@ interface itemProps {
   date: string;
   description: JSX.Element | string;
   image: string;
-  chips: { name: string; color: string }[];
+  skills: { name: string; icon: string }[];
+  Chips: { name: string }[];
 }
 
 export default function Xp() {
+  const motionTooltip = {
+    variants: {
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.1,
+          ease: "easeIn",
+        },
+      },
+      enter: {
+        opacity: 1,
+        transition: {
+          duration: 0.15,
+          ease: "easeOut",
+        },
+      },
+    },
+  };
+
   const items: itemProps[] = [
     {
       company: "Ubisoft Montreal",
@@ -40,13 +61,11 @@ export default function Xp() {
         </div>
       ),
       image: ubisoft,
-      chips: [
-        { name: "C# .NET", color: "bg-secondary-500" },
-        { name: "Micro-services", color: "bg-secondary-500" },
-        { name: "Git", color: "bg-secondary-500" },
-        { name: "Tests unitaires", color: "bg-secondary-500" },
-        { name: "Tests d'intégration", color: "bg-secondary-500" },
+      skills: [
+        { icon: "skill-icons:cs", name: "C#" },
+        { icon: "skill-icons:git", name: "Git" },
       ],
+      Chips: [{ name: "Tests unitaires" }, { name: "Tests d'intégration" }],
     },
     {
       company: "LIRMM - CNRS/Université de Montpellier",
@@ -75,12 +94,17 @@ export default function Xp() {
         </div>
       ),
       image: lirmm,
-      chips: [
-        { name: "React", color: "bg-secondary-500" },
-        { name: "TypeScript", color: "bg-secondary-500" },
-        { name: "Express", color: "bg-secondary-500" },
-        { name: "MinIO", color: "bg-secondary-500" },
-        { name: "Tests unitaires", color: "bg-secondary-500" },
+      skills: [
+        { icon: "skill-icons:react-dark", name: "React" },
+        { icon: "skill-icons:typescript", name: "TypeScript" },
+        { icon: "skill-icons:expressjs-light", name: "ExpressJS" },
+        { icon: "simple-icons:minio", name: "MinIO" },
+      ],
+      Chips: [
+        { name: "Tests end-to-end" },
+        { name: "Tests unitaires" },
+        { name: "Micro-services" },
+        { name: "Mémoisation" },
       ],
     },
     {
@@ -104,58 +128,85 @@ export default function Xp() {
         </div>
       ),
       image: greenoxya,
-      chips: [
-        { name: "C#", color: "bg-secondary-500" },
-        { name: ".NET Core", color: "bg-secondary-500" },
+      skills: [
+        { icon: "skill-icons:cs", name: "C#" },
+        { icon: "skill-icons:git", name: "Git" },
+        { icon: "skill-icons:dotnet", name: ".NET Core" },
       ],
+      Chips: [{ name: "Prise de décisions" }],
     },
   ];
 
   return (
     <section
-      className="sm:mt-24 flex flex-col items-center justify-center gap-6 relative"
+      className="mt-12 sm:mt-24 flex flex-col items-center justify-center gap-6 relative w-full"
       id="skills"
     >
-      <motion.h2
-        animate={{ opacity: 1 }}
-        className="text-4xl font-bold mb-8 text-center"
-        initial={{ opacity: 0 }}
-        transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1], delay: 1 }}
-      >
-        Mes expériences professionnelles
-      </motion.h2>
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className="flex flex-col bg-default-100 px-12 py-6 rounded-xl shadow-md gap-4 w-full"
+      <div className="max-w-7xl flex flex-col gap-8">
+        <motion.h2
+          animate={{ opacity: 1 }}
+          className="text-4xl font-bold mb-8 text-center"
+          initial={{ opacity: 0 }}
+          transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1], delay: 1 }}
         >
-          <div className="flex items-center gap-4">
-            <div className="flex items-center justify-center w-64 h-64 aspect-square flex-shrink-0">
-              <Image
-                alt={item.company}
-                className="bg-neutral-100 p-4 aspect-square object-contain"
-                src={item.image}
-              />
+          Mes expériences professionnelles
+        </motion.h2>
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col bg-default-100 px-12 py-6 rounded-xl shadow-md gap-4 w-full"
+          >
+            <div className="flex max-lg:flex-col items-center gap-4">
+              <div className="flex items-center justify-center w-64 h-64 aspect-square flex-shrink-0">
+                <Image
+                  alt={item.company}
+                  className="bg-neutral-100 p-4 aspect-square object-contain"
+                  src={item.image}
+                />
+              </div>
+              <div className="w-64">
+                <h3 className="text-xl font-semibold">{item.title}</h3>
+                <p className="text-md text-default-500">{item.company}</p>
+                <p className="text-md text-default-400">{item.date}</p>
+              </div>
+              <Divider orientation="vertical" />
+              <div className="flex-1 text-sm text-default-600">
+                {item.description}
+              </div>
             </div>
-            <div className="w-64">
-              <h3 className="text-xl font-semibold">{item.title}</h3>
-              <p className="text-sm text-default-500">{item.company}</p>
-              <p className="text-xs text-default-400">{item.date}</p>
-            </div>
-            <Divider orientation="vertical" />
-            <div className="flex-1 text-sm text-default-600">
-              {item.description}
+            <div className="flex flex-wrap justify-center items-center gap-4">
+              {item.skills.map((elt, idx) => (
+                <Tooltip
+                  key={idx}
+                  closeDelay={0}
+                  content={elt.name}
+                  delay={0}
+                  motionProps={motionTooltip}
+                  placement="bottom"
+                >
+                  <Icon
+                    className="inline-block hover:scale-105 transition-transform duration-300 ease-in-out"
+                    height={48}
+                    icon={elt.icon}
+                    width={48}
+                  />
+                </Tooltip>
+              ))}
+              {item.Chips.map((chip, idx) => (
+                <Chip
+                  key={idx}
+                  className=" hover:bg-default-300 transition-col
+                  gap-2"
+                  size="sm"
+                  variant="solid"
+                >
+                  {chip.name}
+                </Chip>
+              ))}
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {item.chips.map((chip, chipIndex) => (
-              <Chip key={chipIndex} color="secondary">
-                {chip.name}
-              </Chip>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 }

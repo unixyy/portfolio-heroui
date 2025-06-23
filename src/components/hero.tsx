@@ -19,16 +19,20 @@ export default function Hero() {
 
   return (
     <section
-      className="xl:h-[80vh] flex items-center justify-center relative"
+      className="mt-12 flex mx-auto items-center justify-center relative"
       id="home"
     >
       <div className="section-container relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1 }}
             className="order-2 lg:order-1"
-            initial={{ opacity: 0, x: -100 }}
-            transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            transition={{
+              duration: 1.5,
+              delay: 0.5,
+              ease: [0.39, 0.24, 0.3, 1],
+            }}
           >
             <p className="text-warning-600 font-medium mb-2">
               Hey ! moi c&apos;est
@@ -105,10 +109,14 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1 }}
             className="relative order-1 lg:order-2"
-            initial={{ opacity: 0, scale: 0.5 }}
-            transition={{ duration: 1.5, delay: 0.5 }}
+            initial={{ opacity: 0 }}
+            transition={{
+              duration: 1.5,
+              delay: 1.5,
+              ease: [0.39, 0.24, 0.3, 1],
+            }}
           >
             <div className="relative w-full aspect-square max-w-md mx-auto">
               <div className="absolute inset-0 rounded-full gold-gradient opacity-20 blur-2xl" />
@@ -122,7 +130,7 @@ export default function Hero() {
               <div className="absolute -bottom-4 -right-4 bg-content1 p-4 rounded-lg shadow-lg border border-secondary-500/30 gold-glow">
                 <p className="text-lg font-semibold">
                   <span className="text-secondary-500">
-                    ~2 ans d&apos;xp 👾
+                    ~1 ans d&apos;xp Pro !👾
                   </span>
                 </p>
               </div>

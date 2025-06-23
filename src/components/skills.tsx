@@ -68,6 +68,7 @@ export default function Skills() {
         { icon: "devicon:kibana", name: "Kibana" },
         { icon: "skill-icons:jira-dark", name: "Jira" },
         { icon: "skill-icons:postman", name: "Postman" },
+        { icon: "skill-icons:expressjs-light", name: "ExpressJS" },
         { icon: "skill-icons:figma-dark", name: "Figma" },
         { icon: "skill-icons:markdown-dark", name: "Markdown" },
       ],
@@ -84,58 +85,58 @@ export default function Skills() {
 
   return (
     <section
-      className="sm:mt-24 flex flex-col items-center justify-center relative"
+      className="mt-12 sm:mt-24 flex flex-col items-center justify-center relative"
       id="skills"
     >
       <motion.h2
         animate={{ opacity: 1 }}
         className="text-4xl font-bold mb-8 text-center"
         initial={{ opacity: 0 }}
-        transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1], delay: 1 }}
+        transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1], delay: 2 }}
       >
         Mes compétences
       </motion.h2>
-      <div className="flex max-sm:flex-wrap justify-center gap-8">
+      <div className="flex flex-row max-sm:flex-wrap justify-center gap-2 sm:gap-8">
         {mainItems.map((item) => (
           <SpotlightCard
             key={item.title}
-            className="flex flex-col items-center justify-center bg-neutral-100 border-neutral-100 dark:border-neutral-800 dark:bg-neutral-800 hover:scale-110 transition-transform duration-300 ease-in-out"
+            className="flex flex-col items-center justify-center bg-neutral-100 border-neutral-100 dark:border-neutral-800 dark:bg-neutral-800 hover:scale-110 transition-transform duration-300 ease-in-out max-sm:w-36 max-sm:h-36"
             spotlightColor="rgba(246, 246, 246, 0.4)"
           >
             <Image
               alt={`${item.title} Logo`}
-              className=""
-              height={256}
+              className="max-sm:w-24 max-sm:h-24"
               src={item.image}
-              width={256}
             />
-            <h2 className="text-2xl font-bold text-center mt-4">
+            <h2 className="max-sm:text-xs text-2xl font-bold text-center sm:mt-4">
               {item.title}
             </h2>
           </SpotlightCard>
         ))}
       </div>
-      <div className="flex flex-row gap-y-8 gap-x-12 mt-16 flex-wrap">
+      <div className="flex flex-row justify-center gap-y-8 gap-x-12 mt-16 flex-wrap">
         {otherItems.map((item, index) => (
           <div key={index}>
             <div>{item.name}</div>
-            {item.data?.map((elt, idx) => (
-              <Tooltip
-                key={idx}
-                closeDelay={0}
-                content={elt.name}
-                delay={0}
-                motionProps={motionTooltip}
-                placement="bottom"
-              >
-                <Icon
-                  className="inline-block mr-2 hover:scale-105 transition-transform duration-300 ease-in-out"
-                  height={48}
-                  icon={elt.icon}
-                  width={48}
-                />
-              </Tooltip>
-            ))}
+            <div>
+              {item.data?.map((elt, idx) => (
+                <Tooltip
+                  key={idx}
+                  closeDelay={0}
+                  content={elt.name}
+                  delay={0}
+                  motionProps={motionTooltip}
+                  placement="bottom"
+                >
+                  <Icon
+                    className="inline-block mr-2 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    height={48}
+                    icon={elt.icon}
+                    width={48}
+                  />
+                </Tooltip>
+              ))}
+            </div>
           </div>
         ))}
       </div>
