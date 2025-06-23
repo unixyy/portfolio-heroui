@@ -1,8 +1,8 @@
-import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Kbd } from "@heroui/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 import { siteConfig } from "@/config/site";
-import { useEffect } from "react";
 
 export default function SearchAuto() {
   let navigate = useNavigate();
@@ -41,10 +41,28 @@ export default function SearchAuto() {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        const input = document.querySelector<HTMLInputElement>(
+          'input[aria-label="Naviguer..."]',
+        );
+
+        input?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
       <Autocomplete
         className="max-w-xs"
+        endContent={<Kbd keys={["command"]}>K</Kbd>}
         label="Naviguer..."
         size="sm"
         onSelectionChange={handleSelectionChange}
