@@ -1,0 +1,58 @@
+import { Autocomplete, AutocompleteItem } from "@heroui/react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { siteConfig } from "@/config/site";
+import { useEffect } from "react";
+
+export default function SearchAuto() {
+  let navigate = useNavigate();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if there's a hash in the URL (e.g., /page#myId)
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
+  const handleSelectionChange = (key: React.Key | null) => {
+    if (!key) return;
+    const item = siteConfig.navItems.find((_, idx) => idx.toString() === key);
+
+    if (item && item.href) {
+      const id = item.href.replace(/^#/, "");
+      const el = document.getElementById(id);
+
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 100;
+
+        window.scrollTo({ top: y, behavior: "smooth" });
+      } else {
+        navigate(item.page + item.href || "/");
+      }
+    }
+  };
+
+  return (
+    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+      <Autocomplete
+        className="max-w-xs"
+        label="Naviguer..."
+        size="sm"
+        onSelectionChange={handleSelectionChange}
+      >
+        {siteConfig.navItems.map((item, idx) => (
+          <AutocompleteItem key={idx}>{item.label}</AutocompleteItem>
+        ))}
+      </Autocomplete>
+    </div>
+  );
+}

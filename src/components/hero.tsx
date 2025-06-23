@@ -25,9 +25,9 @@ export default function Hero() {
       <div className="section-container relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, x: 0 }}
             className="order-2 lg:order-1"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, x: -200 }}
             transition={{
               duration: 1.5,
               delay: 0.5,
@@ -96,7 +96,7 @@ export default function Hero() {
               </Link>
               <Link
                 aria-label="Twitter"
-                href="https://twitter.com"
+                href="https://twitter.com/unixy_"
                 target="_blank"
               >
                 <Icon
@@ -109,12 +109,12 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, x: 0 }}
             className="relative order-1 lg:order-2"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, x: 200 }}
             transition={{
               duration: 1.5,
-              delay: 1.5,
+              delay: 0.5,
               ease: [0.39, 0.24, 0.3, 1],
             }}
           >

@@ -84,15 +84,19 @@ export default function Skills() {
   ];
 
   return (
-    <section
+    <motion.section
       className="mt-12 sm:mt-24 flex flex-col items-center justify-center relative"
       id="skills"
+      initial={{ opacity: 0 }}
+      transition={{ duration: 1, ease: [0.39, 0.24, 0.3, 1], delay: 1 }}
+      viewport={{ once: true }}
+      whileInView={{ opacity: 1 }}
     >
       <motion.h2
         animate={{ opacity: 1 }}
         className="text-4xl font-bold mb-8 text-center"
         initial={{ opacity: 0 }}
-        transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1], delay: 2 }}
+        transition={{ duration: 2, ease: [0.39, 0.24, 0.3, 1] }}
       >
         Mes compétences
       </motion.h2>
@@ -140,6 +144,6 @@ export default function Skills() {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

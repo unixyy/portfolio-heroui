@@ -138,9 +138,13 @@ export default function Xp() {
   ];
 
   return (
-    <section
+    <motion.section
       className="mt-12 sm:mt-24 flex flex-col items-center justify-center gap-6 relative w-full"
-      id="skills"
+      id="xp"
+      initial={{ opacity: 0 }}
+      transition={{ duration: 1, ease: [0.39, 0.24, 0.3, 1] }}
+      viewport={{ once: true }}
+      whileInView={{ opacity: 1 }}
     >
       <div className="max-w-7xl flex flex-col gap-8">
         <motion.h2
@@ -207,6 +211,6 @@ export default function Xp() {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

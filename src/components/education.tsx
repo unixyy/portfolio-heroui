@@ -40,9 +40,13 @@ export default function Education() {
   ];
 
   return (
-    <section
+    <motion.section
       className="mt-12 sm:mt-24 flex flex-col flex-wrap items-center justify-center gap-6 relative"
       id="education"
+      initial={{ opacity: 0 }}
+      transition={{ duration: 1, ease: [0.39, 0.24, 0.3, 1] }}
+      viewport={{ once: true }}
+      whileInView={{ opacity: 1 }}
     >
       <div>
         <motion.h2
@@ -93,6 +97,6 @@ export default function Education() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -12,6 +12,8 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 
+import SearchAuto from "./searchAuto";
+
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, HeartFilledIcon, SearchIcon } from "@/components/icons";
@@ -40,22 +42,6 @@ export const Navbar = () => {
 
   return (
     <HeroUINavbar className="z-50 fixed" maxWidth="xl" position="sticky">
-      <NavbarContent
-        className="basis-1/5 sm:basis-full absolute"
-        justify="start"
-      >
-        <NavbarBrand className="gap-3 max-w-fit">
-          <Link
-            className="flex justify-start items-center gap-1 font-bold text-xl"
-            color="foreground"
-            href="/"
-          >
-            <p className="font-bold bg-clip-text text-transparent text-2xl bg-gradient-to-r from-secondary-400 to-secondary-600 ">
-              Richard Martin
-            </p>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
       {/* <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <Link
@@ -88,19 +74,29 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="center"
       >
-        <NavbarItem className="hidden sm:flex gap-2 w-28 justify-end">
-          <Link isExternal href={siteConfig.links.github} title="GitHub">
-            <GithubIcon className="text-default-500" />
+        <NavbarItem className="gap-3 max-w-fit">
+          <Link
+            className="flex justify-start items-center gap-1 font-bold text-xl"
+            color="foreground"
+            href="/"
+          >
+            <p className="font-bold bg-clip-text text-transparent text-2xl bg-gradient-to-r from-secondary-400 to-secondary-600 ">
+              Richard Martin
+            </p>
           </Link>
+        </NavbarItem>
+        <NavbarItem className="hidden md:flex">
+          <SearchAuto />
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex gap-2 justify-center">
           <ThemeSwitch />
         </NavbarItem>
-        <NavbarItem className="hidden md:flex">{searchInput}</NavbarItem>
         <NavbarItem className="hidden md:flex">
           <Button
             as={Link}
             className="text-sm font-normal text-default-600 bg-default-100 w-28"
+            endContent={<HeartFilledIcon className="text-danger" />}
             href={"/contact"}
-            startContent={<HeartFilledIcon className="text-danger" />}
             variant="flat"
           >
             Contact
@@ -109,9 +105,6 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
