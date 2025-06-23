@@ -4,7 +4,6 @@ import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
 import {
   Navbar as HeroUINavbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
@@ -16,7 +15,7 @@ import SearchAuto from "./searchAuto";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, HeartFilledIcon, SearchIcon } from "@/components/icons";
+import { HeartFilledIcon, SearchIcon } from "@/components/icons";
 
 export const Navbar = () => {
   const searchInput = (
